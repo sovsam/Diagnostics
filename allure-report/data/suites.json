@@ -1,0 +1,48 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "SerialNo should autopopulate on new registration window serilaNo field",
+    "children" : [ {
+      "name" : "Then user expands add new registration form",
+      "uid" : "865f678a97794714",
+      "parentUid" : "298cf362bf661c0c351cfc36f22ab198",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577400479975,
+        "stop" : 1577400483059,
+        "duration" : 3084
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "And user should see autopopulated SerialNo ",
+      "uid" : "53016e68bcdc043d",
+      "parentUid" : "298cf362bf661c0c351cfc36f22ab198",
+      "status" : "passed",
+      "time" : {
+        "start" : 1577400483059,
+        "stop" : 1577400486086,
+        "duration" : 3027
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "Delete Existing Registration",
+      "uid" : "cb5ca5b699e58c84",
+      "parentUid" : "298cf362bf661c0c351cfc36f22ab198",
+      "status" : "skipped",
+      "time" : {
+        "start" : 1577400486086,
+        "stop" : 1577400486086,
+        "duration" : 0
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "298cf362bf661c0c351cfc36f22ab198"
+  } ]
+}

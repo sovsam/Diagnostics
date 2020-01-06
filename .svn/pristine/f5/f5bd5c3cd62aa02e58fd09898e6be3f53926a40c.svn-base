@@ -1,0 +1,67 @@
+const Application = require('spectron').Application
+const assert = require('assert')
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+const allure = require("mocha-allure-reporter");
+
+global.before(function () {
+    chai.should();
+    chai.use(chaiAsPromised);
+});
+
+var app = new Application({
+    path: 'C:\\Users\\sabdykai\\Downloads\\CCCDiagnostics-v0.0.8\\CCCDiagnostics-v0.0.8.exe'
+
+})
+
+describe('Login function', function () {
+    this.timeout(40000);
+    beforeEach(function () {
+        return app.start()
+    })
+    afterEach('first step', function() {
+      allure.createStep('initial', function()  {
+        app.browserWindow.capturePage().then(function (imageBuffer) {
+         allure.createAttachment(title, new Buffer(imageBuffer, 'base64'));
+         })
+              console.log('screenshot saved');
+              if (app && app.isRunning()) {
+                return app.stop()
+                
+          }
+          });
+      });
+  
+   
+   
+   
+    it('Verify login function',function () {
+      return app.client.browserWindow.isVisible()
+    .then(function (isVisible) {
+      assert.equal(isVisible, true)
+    }).then(function () {
+      return app.client.waitUntilWindowLoaded().element("//a[@id='reset-link']").isVisible()
+    }).then(function (isVisible) {
+      assert.equal(isVisible, true)
+    }).then(function () {
+      return app.browserWindow.maximize()
+    }).then(function () {
+      return app.client.element("//input[@type='text']").setValue('fake').then(function(){
+      return app.client.waitUntilWindowLoaded().element("//input[@type='text']").getValue().should.eventually.equal('testfake')
+    })
+    }).then(function () {
+      return app.client.element("//input[@type='password']").setValue('password').then(function(){
+      return app.client.waitUntilWindowLoaded().element("//input[@type='password']").getValue().should.eventually.equal('testpassword')
+    })
+    }).then(function () {
+       return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+    }).then(function () {
+      var e = new Date().getTime() + (8000);
+      while (new Date().getTime() <= e) {}
+    }).then(function () {
+      return app.client.waitUntilWindowLoaded().element("//div[@class='q-item__label']").isVisible().should.eventually.equal(true)
+    }).then(function () {
+       return app.client.waitUntilWindowLoaded().click("//div[@class='q-item__label']")
+    })
+    })
+    })

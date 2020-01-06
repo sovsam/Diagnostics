@@ -1,0 +1,28 @@
+{
+  "name": "diagnosticstest",
+  "version": "1.0.0",
+  "description": "Testing",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "del allure-results",
+    "test": "mocha --timeout 10000",
+    "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
+  },
+  "author": "Sovet",
+  "license": "ISC",
+  "devDependencies": {
+    "allure-commandline": "^2.13.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.2.2",
+    "mocha-cakes-2": "^3.3.0",
+    "spectron": "^6.0.0"
+  },
+  "dependencies": {
+    "all": "0.0.0",
+    "exceljs": "^3.4.0",
+    "mocha-allure-reporter": "^1.4.0",
+    "mocha-ddt": "0.0.3",
+    "properties-reader": "^0.3.1"
+  }
+}

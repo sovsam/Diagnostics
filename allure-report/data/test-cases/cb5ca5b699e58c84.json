@@ -1,0 +1,48 @@
+{
+  "uid" : "cb5ca5b699e58c84",
+  "name" : "Delete Existing Registration",
+  "fullName" : "SerialNo should autopopulate on new registration window serilaNo field.Delete Existing Registration",
+  "historyId" : "3e8e1f6eda0b0a04c93e7b08e50632c",
+  "time" : {
+    "start" : 1577400486086,
+    "stop" : 1577400486086,
+    "duration" : 0
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "skipped",
+  "statusMessage" : "Test ignored",
+  "statusTrace" : "undefined",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "SerialNo should autopopulate on new registration window serilaNo field"
+  }, {
+    "name" : "testClass",
+    "value" : "SerialNo should autopopulate on new registration window serilaNo field"
+  }, {
+    "name" : "testMethod",
+    "value" : "Delete Existing Registration"
+  }, {
+    "name" : "package",
+    "value" : "SerialNo should autopopulate on new registration window serilaNo field"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cb5ca5b699e58c84.json",
+  "parameterValues" : [ ]
+}

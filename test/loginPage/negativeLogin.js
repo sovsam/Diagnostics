@@ -1,0 +1,146 @@
+const Application = require('spectron').Application
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('./env/dev.properties');
+var Excel = require('exceljs')
+var workbook = new Excel.Workbook();
+var worksheet;
+var row;
+
+
+global.before(function () {
+    chai.should();
+    chai.use(chaiAsPromised);
+});
+
+var app = new Application({
+    path: properties.get('main.app')
+})
+
+
+function Loop(val) {
+    describe('Verify Login Function With Negative Usernames: option #: ' + val, function () {
+
+        this.timeout(40000);
+        beforeEach(function () {
+           
+          });
+
+        before(function () {
+            workbook.csv.readFile('C:\\Workspaces\\DiagnosticsTest\\testData\\loginTestData.csv')
+                .then(function () {
+                    worksheet = workbook.getWorksheet(1);
+                    row = worksheet.getRow(1)
+                    option = row.getCell(val).value;
+
+                })
+               
+            return app.start()
+        })
+        after(function () {
+            if (app && app.isRunning()) {
+                return app.stop()
+            }
+        })
+          /* async function test(val){
+              await workbook.csv.readFile('C:\\Workspaces\\DiagnosticsTest\\testData\\loginTestData.csv');
+               worksheet = workbook.getWorksheet(1);
+               row = worksheet.getRow(1);
+              return option = row.getCell(val).value;
+              
+            }*/
+        
+    
+        it("User inserts random username #: " +val, function () {
+            app.client.element("//input[@type='text']").setValue('\uE003\uE003\uE003\uE003')
+            console.log(row.getCell(val).value)
+            return app.client.element("//input[@type='text']").setValue(row.getCell(val).value)
+            
+        })
+    
+         it('User inserts positive password:  '+properties.get('credentials.password'), function () {
+            app.client.element("//input[@type='password']").setValue('\uE003\uE003\uE003\uE003')
+            return app.client.element("//input[@type='password']")
+            .setValue(properties.get('credentials.passwordN'))
+        })
+        it('When user clicks on login button', function () {
+            var e = new Date().getTime() + (2000);
+            while (new Date().getTime() <= e) { }
+            return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+        })
+        it('Then user should not see scan page', function () {
+            var e = new Date().getTime() + (6000);
+            while (new Date().getTime() <= e) { }
+            return app.client.waitUntilWindowLoaded().element("//div[@class='q-item__label']")
+                .isVisible().should.eventually.equal(false)
+        })
+    })
+}
+for (let i = 1; i < 9; i++) {
+    Loop(i);
+}
+
+function Loop2(val) {
+    describe('Verify Login Function With Negative Passwords: option #: ' + val, function () {
+
+        this.timeout(40000);
+        beforeEach(function () {
+           
+          });
+
+        before(function () {
+            workbook.csv.readFile('C:\\Workspaces\\DiagnosticsTest\\testData\\loginTestData.csv')
+                .then(function () {
+                    worksheet = workbook.getWorksheet(1);
+                    row = worksheet.getRow(1)
+                    option = row.getCell(val).value;
+
+                })
+               
+            return app.start()
+        })
+        after( function () {
+            if (app && app.isRunning()) {
+                return app.stop()
+            }
+        })
+          /* async function test(val){
+              await workbook.csv.readFile('C:\\Workspaces\\DiagnosticsTest\\testData\\loginTestData.csv');
+               worksheet = workbook.getWorksheet(1);
+               row = worksheet.getRow(1);
+              return option = row.getCell(val).value;
+              
+            }*/
+        
+    
+        it("User inserts valid username  " +properties.get('credentials.username'), function () {
+            app.client.element("//input[@type='text']").setValue('\uE003\uE003\uE003\uE003')
+            console.log(row.getCell(val).value)
+            return app.client.element("//input[@type='text']")
+            .setValue(properties.get('credentials.username'))
+            
+        })
+    
+         it('User inserts negative password option #:  '+val, function () {
+            app.client.element("//input[@type='password']").setValue('\uE003\uE003\uE003\uE003')
+            return app.client.element("//input[@type='password']")
+            .setValue(row.getCell(val).value)
+        })
+        it('When user clicks on login button', function () {
+            var e = new Date().getTime() + (2000);
+            while (new Date().getTime() <= e) { }
+            return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+        })
+        it('Then user should not see scan page', function () {
+            var e = new Date().getTime() + (6000);
+            while (new Date().getTime() <= e) { }
+            return app.client.waitUntilWindowLoaded().element("//div[@class='q-item__label']")
+                .isVisible().should.eventually.equal(false)
+        })
+    })
+}
+for (let i = 1; i < 9; i++) {
+    Loop2(i);
+}
+

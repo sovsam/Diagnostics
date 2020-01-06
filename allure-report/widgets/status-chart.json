@@ -1,0 +1,31 @@
+[ {
+  "uid" : "865f678a97794714",
+  "name" : "Then user expands add new registration form",
+  "time" : {
+    "start" : 1577400479975,
+    "stop" : 1577400483059,
+    "duration" : 3084
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "53016e68bcdc043d",
+  "name" : "And user should see autopopulated SerialNo ",
+  "time" : {
+    "start" : 1577400483059,
+    "stop" : 1577400486086,
+    "duration" : 3027
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cb5ca5b699e58c84",
+  "name" : "Delete Existing Registration",
+  "time" : {
+    "start" : 1577400486086,
+    "stop" : 1577400486086,
+    "duration" : 0
+  },
+  "status" : "skipped",
+  "severity" : "normal"
+} ]

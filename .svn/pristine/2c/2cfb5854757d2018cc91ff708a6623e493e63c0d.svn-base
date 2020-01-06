@@ -1,0 +1,27 @@
+
+const assert = require('assert')
+const Excel = require('exceljs')
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
+//Read a file
+var workbook = new Excel.Workbook();
+workbook.xlsx.readFile("C:\\Users\\sabdykai\\Documents\\test.xlsx").then(function () {
+            
+//Get sheet by Name
+var worksheet=workbook.getWorksheet('Sheet1');
+            
+//Get Lastrow
+var row = worksheet.lastRow
+            
+//Update a cell
+row.getCell(1).value = 15;
+ 
+row.commit();
+ 
+//Save the workbook
+ workbook.xlsx.writeFile("C:\\Users\\sabdykai\\Documents\\test.xlsx");
+var cell = row.getCell(1).value;
+return assert.equal(cell, 5)
+ 
+});

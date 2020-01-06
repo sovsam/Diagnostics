@@ -1,0 +1,59 @@
+const Application = require('spectron').Application
+const assert = require('assert')
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
+global.before(function () {
+    chai.should();
+    chai.use(chaiAsPromised);
+})
+
+var app = new Application({
+    path: 'C:\\Users\\sabdykai\\Downloads\\CCCDiagnostics-v0.0.8\\CCCDiagnostics-v0.0.8.exe'
+})
+
+describe('Verify Main functions', function () {
+    this.timeout(40000);
+    beforeEach(function () {
+        return app.start()
+    })
+    afterEach(function() {
+        if (app && app.isRunning()) {
+          return app.stop()
+    }
+    })
+   
+    it('counting the window', function () {
+       return app.client.getWindowCount().then(function (count) {
+        assert.equal(count, 1)
+    })
+    })
+    it('tests the title', function () {
+       return app.client.waitUntilWindowLoaded()
+       .getTitle().should.eventually.equal('PartsDiagnostics')
+    })
+    it('is dev tools opended', function () {
+        return app.client.browserWindow.isDevToolsOpened().should.eventually.equal(false)
+    })
+    it('is browser window visible', function () {
+        return app.client.browserWindow.isVisible().should.eventually.equal(true)
+    })
+    it('maximize the window', function () {
+       return app.client.waitUntilWindowLoaded().browserWindow.maximize().then(function(){
+       return app.client.waitUntilWindowLoaded().browserWindow.isMaximized().should.eventually.equal(true)
+    })
+    })
+    it('inserting username', function () {
+        return app.client.waitUntilWindowLoaded().element("//input[@type='text']").setValue('fake').then(function(){
+        return app.client.waitUntilWindowLoaded().element("//input[@type='text']").getValue().should.eventually.equal('testfake')
+    })
+    })
+    it('inserting password', function () {
+        return app.client.waitUntilWindowLoaded().element("//input[@type='password']").setValue('password').then(function(){
+        return app.client.waitUntilWindowLoaded().element("//input[@type='password']").getValue().should.eventually.equal('testpassword')
+    })
+    })
+    it('clicking login button', function () {
+        return app.client.waitUntilWindowLoaded().element("//button[@type='submit']").click()
+    })
+    })

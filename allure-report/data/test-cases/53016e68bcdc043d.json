@@ -1,0 +1,46 @@
+{
+  "uid" : "53016e68bcdc043d",
+  "name" : "And user should see autopopulated SerialNo ",
+  "fullName" : "SerialNo should autopopulate on new registration window serilaNo field.And user should see autopopulated SerialNo ",
+  "historyId" : "aa873b276d867a9add8c15325efebb49",
+  "time" : {
+    "start" : 1577400483059,
+    "stop" : 1577400486086,
+    "duration" : 3027
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "SerialNo should autopopulate on new registration window serilaNo field"
+  }, {
+    "name" : "testClass",
+    "value" : "SerialNo should autopopulate on new registration window serilaNo field"
+  }, {
+    "name" : "testMethod",
+    "value" : "And user should see autopopulated SerialNo "
+  }, {
+    "name" : "package",
+    "value" : "SerialNo should autopopulate on new registration window serilaNo field"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "53016e68bcdc043d.json",
+  "parameterValues" : [ ]
+}
