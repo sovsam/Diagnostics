@@ -1,5 +1,26 @@
 {
   "uid" : "4b4757e66a1912dae1a509f688f20b0f",
   "name" : "categories",
-  "children" : [ ]
+  "children" : [ {
+    "name" : "Test defects",
+    "children" : [ {
+      "name" : "browser is not defined",
+      "children" : [ {
+        "name" : "Verify login function with credentials: JOHN SMITH: abc123",
+        "uid" : "9108fe3ff372d25d",
+        "parentUid" : "1ad4d7d66bde9fac6d381acf43bc8402",
+        "status" : "broken",
+        "time" : {
+          "start" : 1578678339723,
+          "stop" : 1578678350598,
+          "duration" : 10875
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "1ad4d7d66bde9fac6d381acf43bc8402"
+    } ],
+    "uid" : "bdbf199525818fae7a8651db9eafe741"
+  } ]
 }

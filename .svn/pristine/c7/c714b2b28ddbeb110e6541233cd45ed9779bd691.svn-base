@@ -1,0 +1,51 @@
+const Application = require('spectron').Application
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('./env/dev.properties');
+
+global.before(function () {
+  chai.should();
+  chai.use(chaiAsPromised);
+})
+
+var app = new Application({
+  path: properties.get('main.app')
+
+})
+
+describe('User is on the Scan window', function () {
+  this.timeout(40000);
+  beforeEach(function () {
+    return app.start()
+      .then(function () {
+        return app.client.element("//input[@type='text']") .setValue('\uE003\uE003\uE003\uE003')
+       }).then(function(){
+        return app.client.element("//input[@type='text']")
+       .setValue(properties.get('credentials.username'))
+      }).then(function () {
+        return app.client.element("//input[@type='password']").setValue('\uE003\uE003\uE003\uE003')
+       }).then(function(){
+        return app.client.element("//input[@type='password']")
+      .setValue(properties.get('credentials.password'))
+      }).then(function () {
+        var e = new Date().getTime() + (2000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+      }).then(function () {
+        var e = new Date().getTime() + (6000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded()
+          
+      })
+  })
+  afterEach(function () {
+    if (app && app.isRunning()) {
+      return app.stop()
+    }
+  })
+
+  it('Verify Scan function', function () {
+    
+  })
+})

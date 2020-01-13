@@ -2,47 +2,21 @@
   "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
   "name" : "packages",
   "children" : [ {
-    "name" : "SerialNo should autopopulate on new registration window serilaNo field",
+    "name" : "Login function",
     "children" : [ {
-      "name" : "Then user expands add new registration form",
-      "uid" : "865f678a97794714",
-      "parentUid" : "83a0154b5cd8891bb3ac20413bad5b0c",
-      "status" : "passed",
+      "name" : "Verify login function with credentials: JOHN SMITH: abc123",
+      "uid" : "9108fe3ff372d25d",
+      "parentUid" : "b0673ec5541dedb5688b1bfc1a3b1078",
+      "status" : "broken",
       "time" : {
-        "start" : 1577400479975,
-        "stop" : 1577400483059,
-        "duration" : 3084
-      },
-      "flaky" : false,
-      "newFailed" : false,
-      "parameters" : [ ]
-    }, {
-      "name" : "And user should see autopopulated SerialNo ",
-      "uid" : "53016e68bcdc043d",
-      "parentUid" : "83a0154b5cd8891bb3ac20413bad5b0c",
-      "status" : "passed",
-      "time" : {
-        "start" : 1577400483059,
-        "stop" : 1577400486086,
-        "duration" : 3027
-      },
-      "flaky" : false,
-      "newFailed" : false,
-      "parameters" : [ ]
-    }, {
-      "name" : "Delete Existing Registration",
-      "uid" : "cb5ca5b699e58c84",
-      "parentUid" : "83a0154b5cd8891bb3ac20413bad5b0c",
-      "status" : "skipped",
-      "time" : {
-        "start" : 1577400486086,
-        "stop" : 1577400486086,
-        "duration" : 0
+        "start" : 1578678339723,
+        "stop" : 1578678350598,
+        "duration" : 10875
       },
       "flaky" : false,
       "newFailed" : false,
       "parameters" : [ ]
     } ],
-    "uid" : "83a0154b5cd8891bb3ac20413bad5b0c"
+    "uid" : "b0673ec5541dedb5688b1bfc1a3b1078"
   } ]
 }

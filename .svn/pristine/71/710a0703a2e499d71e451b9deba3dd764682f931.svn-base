@@ -1,0 +1,226 @@
+const Application = require('spectron').Application
+const assert = require('assert')
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('./env/dev.properties');
+
+global.before(function () {
+
+  chai.should();
+  chai.use(chaiAsPromised)
+})
+
+var app = new Application({
+  path: properties.get('main.app')
+
+})
+
+describe('User is on the Registration window', function () {
+  this.timeout(40000)
+
+  beforeEach('User is on the Registration window', function () {
+    return app.start()
+      .then(function () {
+        return app.client.element("//input[@type='text']") .setValue('\uE003\uE003\uE003\uE003')
+       
+     }).then(function(){
+        return app.client.element("//input[@type='text']")
+       .setValue(properties.get('credentials.username'))
+      
+
+      }).then(function () {
+        return app.client.element("//input[@type='password']").setValue('\uE003\uE003\uE003\uE003')
+
+      }).then(function(){
+        return app.client.element("//input[@type='password']")
+      .setValue(properties.get('credentials.password'))
+      
+
+      }).then(function () {
+        var e = new Date().getTime() + (2000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+      }).then(function () {
+        var e = new Date().getTime() + (6000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded()
+          .click("//div[@class='q-drawer__content fit scroll bg-blue-grey-10']/div/div[3]")
+      })
+  })
+
+
+  afterEach(function () {
+    return app.stop()
+  })
+
+  it('User expands add new registration form, autopopulated SerialNO displayed', function () {
+    var e = new Date().getTime() + (3000);
+    while (new Date().getTime() <= e) { }
+    return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+      .then(function () {
+        var e = new Date().getTime() + (4000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().element("//input[@aria-label='Serial Number']")
+          .getValue().should.eventually.exist
+      })
+  })
+  it('Clicking Settings button lands user to Registration window', function () {
+    var e = new Date().getTime() + (5000);
+    while (new Date().getTime() <= e) { }
+    return app.client.waitUntilWindowLoaded()
+      .click("//div[@class='q-drawer__content fit scroll bg-blue-grey-10']/div/div[3]")
+      .then(function () {
+        return app.client.waitUntilWindowLoaded()
+          .element("//main[@class='q-page']//button")
+          .isVisible().should.eventually.equal(true)
+      })
+  })
+  it('Clicking New Registration button pops up Add New Registration window',function(){
+    var e = new Date().getTime() + (3000);
+    while (new Date().getTime() <= e) { }
+    return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+      .then(function () {
+        var e = new Date().getTime() + (4000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().element("//input[@aria-label='Serial Number']")
+          .isVisible().should.eventually.equal(true)
+      })
+  })
+  it('User should able to expand Diagnostic Provider dropdown and see the options', function(){
+    var e = new Date().getTime() + (3000);
+    while (new Date().getTime() <= e) { }
+    return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+    .then(function () {
+      var e = new Date().getTime() + (3000);
+      while (new Date().getTime() <= e) { }
+      return app.client.waitUntilWindowLoaded().click("//i[contains(text(),'arrow_drop_down')]")
+      .then(function () {
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded()
+        .element("//div[@class='q-menu scroll']//div[contains(text(),'Honda')]")
+        .isVisible().should.eventually.equal(true)
+  })
+})
+})
+it('Submiting New registration form without Diagnostic Provider selected should dislpay error', function(){
+  var e = new Date().getTime() + (3000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+  .then(function () {
+    var e = new Date().getTime() + (3000);
+    while (new Date().getTime() <= e) { }
+    return app.client.waitUntilWindowLoaded().click("//i[contains(text(),'arrow_drop_down')]")
+    .then(function () {
+      var e = new Date().getTime() + (3000);
+      while (new Date().getTime() <= e) { }
+      return app.client.waitUntilWindowLoaded()
+      .element("//input[@aria-label='Nickname']").setValue('honda')
+      .then(function () {
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+        .then(function () {
+          var e = new Date().getTime() + (4000);
+          while (new Date().getTime() <= e) { }
+          return app.client.waitUntilWindowLoaded()
+          .element("//div[contains(text(),'Field is required')]")
+          .isVisible().should.eventually.equal(true)
+    })
+})
+})
+  })
+})
+it('Closing the New Registration form lands to Registration window',function(){
+  var e = new Date().getTime() + (3000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+  .then(function () {
+  var e = new Date().getTime() + (4000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("(//i[contains(text(),'close')])[2]")
+  .then(function(){
+    var e = new Date().getTime() + (3000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded()
+  .element("//div[contains(text(),'REGISTRATIONS')]")
+  .getText().should.eventually.equal('REGISTRATIONS')
+ })
+})
+})
+it('New registration should displayed on Active Registration List',function(){
+  var e = new Date().getTime() + (3000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+.then(function () {
+ var e = new Date().getTime() + (4000);
+ while (new Date().getTime() <= e) { }
+ return app.client.waitUntilWindowLoaded().click("//i[contains(text(),'arrow_drop_down')]")
+.then(function(){
+ var e = new Date().getTime() + (4000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded()
+ .click("//div[@class='q-menu scroll']//div[contains(text(),'Honda')]")
+.then(function () {
+ var e = new Date().getTime() + (3000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded()
+  .element("//input[@aria-label='Nickname']").setValue('ABC')
+   .then(function () {
+   var e = new Date().getTime() + (3000);
+   while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+   .then(function () {
+   var e = new Date().getTime() + (3000);
+   while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("//div[@class='q-list']/div")
+   .then(function () {
+   var e = new Date().getTime() + (2000);
+   while (new Date().getTime() <= e) { }
+    return app.client.waitUntilWindowLoaded().click("//i[contains(text(),'arrow_drop_down')]")
+      .then(function(){
+     var e = new Date().getTime() + (4000);
+    while (new Date().getTime() <= e) { }
+     return app.client.waitUntilWindowLoaded()
+     .element("//div[contains(text(),'ABC')]")
+    .getText().should.eventually.equal('Honda - Provider (ABC)')
+})
+})
+   })
+  })
+})
+  })
+})
+})
+it('"New Registration" title should be displayed on add new registration pop up window ',function(){
+  var e = new Date().getTime() + (3000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+  .then(function () {
+  var e = new Date().getTime() + (2000);
+  while (new Date().getTime() <= e) { }
+   return app.client.waitUntilWindowLoaded()
+   .element("//div[contains(text(),'New Registration')]")
+  .getText().should.eventually.equal('New Registration')
+})
+})
+it.skip('Serial number should autopopulated and user should not be able to edit Serial number field', function(){
+  var e = new Date().getTime() + (3000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+  .then(function () {
+  var e = new Date().getTime() + (2000);
+  while (new Date().getTime() <= e) { }
+  return app.client.waitUntilWindowLoaded().element("//input[@aria-label='Serial Number']")
+  .getValue().should.eventually.exist
+  .then(function () {
+    var e = new Date().getTime() + (2000);
+    while (new Date().getTime() <= e) { }
+    return app.client.waitUntilWindowLoaded().element("//input[@aria-label='Serial Number']")
+  .isEnabled().should.eventually.equal(false)
+   
+  })
+})
+})
+})

@@ -1,0 +1,52 @@
+{
+  "uid" : "9108fe3ff372d25d",
+  "name" : "Verify login function with credentials: JOHN SMITH: abc123",
+  "fullName" : "Login function.Verify login function with credentials: JOHN SMITH: abc123",
+  "historyId" : "4e4a54ac46aa329dcc245c822bdee44a",
+  "time" : {
+    "start" : 1578678339723,
+    "stop" : 1578678350598,
+    "duration" : 10875
+  },
+  "description" : "",
+  "descriptionHtml" : "",
+  "status" : "broken",
+  "statusMessage" : "browser is not defined",
+  "statusTrace" : "ReferenceError: browser is not defined\n                    at Context.<anonymous> (random\\screenshot.js:28:21)\n                    at processImmediate (internal/timers.js:439:21)\n                    at process.topLevelDomainCallback (domain.js:131:23)",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "Login function"
+  }, {
+    "name" : "testClass",
+    "value" : "Login function"
+  }, {
+    "name" : "testMethod",
+    "value" : "Verify login function with credentials: JOHN SMITH: abc123"
+  }, {
+    "name" : "package",
+    "value" : "Login function"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure1"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "9108fe3ff372d25d.json",
+  "parameterValues" : [ ]
+}

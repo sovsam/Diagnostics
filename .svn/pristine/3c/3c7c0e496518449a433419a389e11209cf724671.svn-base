@@ -1,0 +1,174 @@
+const Application = require('spectron').Application
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+const allure = require('mocha-allure-reporter');
+var PropertiesReader = require('properties-reader');
+var properties = PropertiesReader('./env/dev.properties');
+
+global.before(function () {
+    chai.should();
+    chai.use(chaiAsPromised);
+});
+
+var app = new Application({
+    path: properties.get('main.app')
+})
+
+describe('User should able to add new registration and Delete added registration', function () {
+    this.timeout(40000);
+    before(function () {
+        return app.start()
+    })
+    after( function() {
+        if (app && app.isRunning()) {
+            return app.stop()
+        }
+    })
+    it('User inserts positive username:  '+properties.get('credentials.username'),function () {
+        app.client.element("//input[@type='text']").setValue('\uE003\uE003\uE003\uE003')
+        return app.client.element("//input[@type='text']")
+        .setValue(properties.get('credentials.username'))
+    })  
+    it('User inserts positive password:  '+properties.get('credentials.password'),function(){
+        app.client.element("//input[@type='password']").setValue('\uE003\uE003\uE003\uE003')
+        return app.client.element("//input[@type='password']")
+        .setValue(properties.get('credentials.password'))
+    }) 
+    it('When user clicks on login button', function(){
+        var e = new Date().getTime() + (2000);
+        while (new Date().getTime() <= e) {}
+        return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+    })
+    it('Then user should see scan page', function(){
+        var e = new Date().getTime() + (6000);
+        while (new Date().getTime() <= e) {}
+        return app.client.waitUntilWindowLoaded().element("//div[@class='q-item__label']")
+       .isVisible().should.eventually.equal(true)
+    })
+    it('When user clicks on Settings icon', function(){
+        return app.client.waitUntilWindowLoaded()
+        .click("//div[@class='q-drawer__content fit scroll bg-blue-grey-10']/div/div[3]")
+    })
+    it('Then user should able to expand add new registration form', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//main[@class='q-page']//button")
+    })
+    it('And user expands options of Diagnostic Provider dropdown', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//i[contains(text(),'arrow_drop_down')]")
+    })
+    it('Then user should able to select one of the options', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded()
+        .click("//div[@class='q-menu scroll']//div[contains(text(),'Honda')]")
+    })
+    it('And user should able to insert nickname to Nickaname field', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.element("//input[@aria-label='Nickname']").setValue('test')
+    })
+    it('Then user submits the form', function(){
+        var e = new Date().getTime() + (4000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+    })
+    it('And user must see added registration on the page', function(){
+        var e = new Date().getTime() + (5000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().element("//div[contains(text(),'test')]")
+          .getText().should.eventually.equal('test')
+    })
+    it('Then user closes the application',function(){
+        return app.stop()
+    })
+    it('And user starts the application', function(){
+        return app.start()
+    })
+    it('User inserts positive username:  '+properties.get('credentials.username'),function () {
+        app.client.element("//input[@type='text']").setValue('\uE003\uE003\uE003\uE003')
+        return app.client.element("//input[@type='text']")
+        .setValue(properties.get('credentials.username'))
+    })  
+    it('User inserts positive password:  '+properties.get('credentials.password'),function(){
+        app.client.element("//input[@type='password']").setValue('\uE003\uE003\uE003\uE003')
+        return app.client.element("//input[@type='password']")
+        .setValue(properties.get('credentials.password'))
+    }) 
+    it('When user clicks on login button', function(){
+        var e = new Date().getTime() + (2000);
+        while (new Date().getTime() <= e) {}
+        return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+    })
+    it('Then user lands on Scan page and clicks Settings button ', function(){
+        var e = new Date().getTime() + (6000);
+        while (new Date().getTime() <= e) {}
+        return app.client.waitUntilWindowLoaded()
+        .click("//div[@class='q-drawer__content fit scroll bg-blue-grey-10']/div/div[3]")
+    })
+    it('And user must see added registration on the page', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().element("//div[contains(text(),'test')]")
+          .getText().should.eventually.equal('test')
+    })
+    it('When user clicks on delete icone for added registration', function(){
+        return app.client.waitUntilWindowLoaded().click("//div[contains(text(),'test')]/../../div[6]/i")
+    })
+    it('Then user should able to cancel delete action by clicking cancel button',function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//div[@class='q-card']/div/button")
+    })
+    it('And user clicks on delete icone for added registration', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//div[contains(text(),'test')]/../../div[6]/i")
+    })
+    it('Then user should confirm to delete submitting ok button', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.waitUntilWindowLoaded().click("//div[@class='q-card']/div/button[2]")
+    })
+    it('And user should not see the registration on the page', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.isExisting("//div[contains(text(),'test')]")
+        .should.eventually.equal(false)
+    })
+    it('Then user closes the application',function(){
+        return app.stop()
+    })
+    it('And user starts the application', function(){
+        return app.start()
+    })
+    it('User inserts positive username:  '+properties.get('credentials.username'),function () {
+        app.client.element("//input[@type='text']").setValue('\uE003\uE003\uE003\uE003')
+        return app.client.element("//input[@type='text']")
+        .setValue(properties.get('credentials.username'))
+    })  
+    it('User inserts positive password:  '+properties.get('credentials.password'),function(){
+        app.client.element("//input[@type='password']").setValue('\uE003\uE003\uE003\uE003')
+        return app.client.element("//input[@type='password']")
+        .setValue(properties.get('credentials.password'))
+    }) 
+    it('When user clicks on login button', function(){
+        var e = new Date().getTime() + (2000);
+        while (new Date().getTime() <= e) {}
+        return app.client.waitUntilWindowLoaded().click("//button[@type='submit']")
+    })
+    it('Then user lands on Scan page and clicks Settings button ', function(){
+        var e = new Date().getTime() + (6000);
+        while (new Date().getTime() <= e) {}
+        return app.client.waitUntilWindowLoaded()
+        .click("//div[@class='q-drawer__content fit scroll bg-blue-grey-10']/div/div[3]")
+    })
+    it('And deleted registration should not be displayed on the list', function(){
+        var e = new Date().getTime() + (3000);
+        while (new Date().getTime() <= e) { }
+        return app.client.isExisting("//div[contains(text(),'test')]")
+        .should.eventually.equal(false)
+    })
+})  

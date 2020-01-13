@@ -1,15 +1,15 @@
 {
   "total" : 1,
   "items" : [ {
-    "uid" : "298cf362bf661c0c351cfc36f22ab198",
-    "name" : "SerialNo should autopopulate on new registration window serilaNo field",
+    "uid" : "663338ce751a1bd6f37ec7215460d11e",
+    "name" : "Login function",
     "statistic" : {
       "failed" : 0,
-      "broken" : 0,
-      "skipped" : 1,
-      "passed" : 2,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
       "unknown" : 0,
-      "total" : 3
+      "total" : 1
     }
   } ]
 }
