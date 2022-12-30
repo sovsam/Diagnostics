@@ -14,7 +14,7 @@
     "allure-commandline": "^2.13.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "mocha-cakes-2": "^3.3.0",
     "spectron": "^6.0.0"
   },
